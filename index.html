@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NexFly IT – সব ডিজিটাল সার্ভিস, এক জায়গায়</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a0720;--bg2:#120c33;--card:rgba(30,20,75,.65);--line:rgba(140,110,255,.25);--p:#7c3aed;--p2:#a855f7;--cy:#22d3ee;--tx:#f1ecff;--mut:#a9a0d0;--ok:#22c55e;--warn:#f59e0b;--bad:#ef4444}
+body.light{--bg:#f4f1ff;--bg2:#fff;--card:rgba(255,255,255,.85);--line:rgba(124,58,237,.2);--tx:#1a1240;--mut:#5b5490}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Hind Siliguri',sans-serif;background:radial-gradient(1200px 600px at 20% -10%,rgba(124,58,237,.35),transparent),radial-gradient(900px 500px at 100% 10%,rgba(34,211,238,.12),transparent),var(--bg);color:var(--tx);min-height:100vh;padding-bottom:70px}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer;border:0;color:inherit}
+input,select,textarea{font-family:inherit;width:100%;padding:12px 14px;border-radius:12px;border:1px solid var(--line);background:rgba(255,255,255,.06);color:var(--tx);font-size:15px;outline:none}
+body.light input,body.light select,body.light textarea{background:#fff}
+input:focus,select:focus,textarea:focus{border-color:var(--p2);box-shadow:0 0 0 3px rgba(168,85,247,.2)}
+select option{color:#111}
+.wrap{max-width:1180px;margin:0 auto;padding:0 16px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 20px;border-radius:12px;font-weight:600;font-size:15px;background:linear-gradient(135deg,var(--p),var(--p2));color:#fff;box-shadow:0 8px 24px rgba(124,58,237,.4);transition:.2s}
+.btn:hover{transform:translateY(-2px)}
+.btn.ghost{background:transparent;border:1px solid var(--line);box-shadow:none;color:var(--tx)}
+.btn.sm{padding:8px 14px;font-size:13px;border-radius:10px}
+.btn.ok{background:linear-gradient(135deg,#16a34a,#22c55e);box-shadow:none}
+.btn.bad{background:linear-gradient(135deg,#dc2626,#ef4444);box-shadow:none}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;backdrop-filter:blur(8px)}
+header{position:sticky;top:0;z-index:50;background:rgba(10,7,32,.8);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+body.light header{background:rgba(255,255,255,.85)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:66px;gap:12px}
+.logo{display:flex;align-items:center;gap:10px;font-family:Poppins;font-weight:800;font-size:22px}
+.logo i{font-style:italic;color:var(--p2)}
+.logo small{display:block;font-family:'Hind Siliguri';font-size:10px;font-weight:400;color:var(--mut);margin-top:-4px}
+.links{display:flex;gap:6px;align-items:center}
+.links a{padding:8px 14px;border-radius:10px;font-weight:500;color:var(--mut)}
+.links a.on,.links a:hover{background:rgba(124,58,237,.25);color:var(--tx)}
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:20px;align-items:center;padding:36px 0 18px}
+.badge{display:inline-flex;gap:8px;align-items:center;padding:6px 14px;border-radius:99px;border:1px solid var(--line);font-size:13px;background:rgba(255,255,255,.05)}
+.hero h1{font-family:Poppins;font-size:clamp(40px,7vw,68px);font-weight:800;margin:14px 0 6px;line-height:1.05}
+.hero h1 i{color:var(--p2)}
+.hero .tag{font-size:clamp(20px,3.2vw,30px);font-weight:700;color:var(--cy);margin-bottom:8px}
+.hero p{color:var(--mut);margin-bottom:18px}
+.search{display:flex;gap:0;border-radius:14px;overflow:hidden;border:1px solid var(--line);background:rgba(255,255,255,.08);max-width:520px}
+.search input{border:0;background:transparent;border-radius:0}
+.search button{padding:0 22px;background:linear-gradient(135deg,var(--p),var(--p2));font-weight:600;color:#fff}
+.art{display:flex;justify-content:center}
+.orb{position:relative;width:min(340px,80vw);animation:fl 5s ease-in-out infinite}.orb img{width:100%;border-radius:36px;box-shadow:0 20px 60px rgba(124,58,237,.7)}.orb span{position:absolute;font-size:44px;background:rgba(30,20,75,.8);border:1px solid var(--line);border-radius:16px;padding:6px 10px;backdrop-filter:blur(6px)}
+@keyframes fl{50%{transform:translateY(-12px)}}
+.cats{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin:14px 0}
+.cat{padding:16px 8px;text-align:center;border-radius:16px;cursor:pointer;transition:.2s;font-weight:500;font-size:14px}
+.cat:hover,.cat.on{border-color:var(--p2);transform:translateY(-3px);background:rgba(124,58,237,.3)}
+.cat b{display:block;font-size:28px;margin-bottom:4px}
+.strip{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;padding:14px;margin:14px 0}
+.strip div{display:flex;gap:10px;align-items:center;justify-content:center;font-size:14px}
+.strip span{font-size:26px}
+.strip small{display:block;color:var(--mut)}
+h2.t{font-size:22px;margin:22px 0 12px;display:flex;justify-content:space-between;align-items:center}
+h2.t small{font-size:13px;color:var(--p2);font-weight:500}
+.split{display:grid;grid-template-columns:1.5fr 1fr;gap:16px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px}
+.svc{padding:12px;overflow:hidden}
+.svc .im{height:110px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:46px;margin-bottom:10px}
+.svc h3{font-size:16px;margin-bottom:2px}
+.svc p{font-size:13px;color:var(--mut);margin-bottom:10px;min-height:36px}
+.svc .pr{color:var(--cy);font-weight:700;margin-bottom:8px}
+.svc .btn{width:100%}
+.offer{padding:24px;background:linear-gradient(135deg,rgba(124,58,237,.55),rgba(168,85,247,.2));display:flex;flex-direction:column;justify-content:center;gap:8px}
+.offer h3{font-size:30px;line-height:1.1}
+.cd{display:flex;gap:8px;margin-top:6px}
+.cd div{background:rgba(0,0,0,.35);border-radius:10px;padding:6px 12px;text-align:center}
+.cd b{display:block;font-size:20px}
+.cd small{font-size:11px;color:var(--mut)}
+.why{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.why .card{padding:18px;text-align:center}
+.why span{font-size:30px}
+.why b{display:block;margin:4px 0}
+.why small{color:var(--mut)}
+footer{margin-top:40px;border-top:1px solid var(--line);padding:26px 0;background:rgba(0,0,0,.15)}
+.fg{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:20px;font-size:14px;color:var(--mut)}
+.fg h4{color:var(--tx);margin-bottom:8px}
+.fg a{display:block;margin:4px 0}
+.pays{display:flex;gap:8px;flex-wrap:wrap}
+.pay{padding:6px 12px;border-radius:8px;font-weight:700;font-size:13px;color:#fff}
+.bk{background:#e2136e}.ng{background:#f6921e}.rk{background:#8c3494}
+.copy{text-align:center;color:var(--mut);font-size:13px;margin-top:20px}
+.pg{padding:24px 0}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.box{padding:18px}
+.box h3{margin-bottom:10px}
+.pk{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:10px;margin:10px 0}
+.pk button{padding:12px 8px;border-radius:12px;border:1px solid var(--line);background:rgba(255,255,255,.05);font-weight:600}
+.pk button small{display:block;color:var(--cy);font-size:14px}
+.pk button.on{border-color:var(--p2);background:rgba(124,58,237,.4)}
+label{display:block;font-size:13px;color:var(--mut);margin:12px 0 6px}
+.ticks{display:flex;flex-direction:column;gap:6px;color:var(--mut);font-size:14px;margin:10px 0}
+.ticks span::before{content:"✔ ";color:var(--ok)}
+.methods{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.methods button{padding:14px;border-radius:12px;border:2px solid transparent;color:#fff;font-weight:700}
+.methods button.on{border-color:#fff}
+.row{display:flex;gap:8px}
+.sum{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px dashed var(--line)}
+.step{display:flex;gap:12px;align-items:flex-start;margin:14px 0}
+.dot{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;background:rgba(255,255,255,.1);flex:none}
+.dot.d{background:var(--ok)}.dot.x{background:var(--bad)}
+.ol{padding:14px;margin-bottom:10px;cursor:pointer}
+.st{padding:3px 10px;border-radius:99px;font-size:12px;font-weight:600}
+.st.pending{background:rgba(245,158,11,.2);color:var(--warn)}
+.st.processing{background:rgba(34,211,238,.2);color:var(--cy)}
+.st.completed{background:rgba(34,197,94,.2);color:var(--ok)}
+.st.rejected{background:rgba(239,68,68,.2);color:var(--bad)}
+.adm{display:grid;grid-template-columns:220px 1fr;gap:16px}
+.side{padding:12px;height:fit-content}
+.side button{display:block;width:100%;text-align:left;padding:11px 12px;border-radius:10px;background:transparent;color:var(--mut);font-weight:500;margin:2px 0}
+.side button.on{background:rgba(124,58,237,.35);color:var(--tx)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:14px}
+.stat{padding:16px}
+.stat small{color:var(--mut)}
+.stat b{display:block;font-size:26px;margin-top:4px}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--mut);font-weight:500}
+.tw{overflow-x:auto}
+.bars{display:flex;align-items:flex-end;gap:10px;height:140px;margin-top:10px}
+.bars div{flex:1;background:linear-gradient(to top,var(--p),var(--cy));border-radius:6px 6px 0 0;position:relative;min-height:4px}
+.bars span{position:absolute;bottom:-20px;left:0;right:0;text-align:center;font-size:11px;color:var(--mut)}
+.toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%);background:#1e1b4b;border:1px solid var(--p2);color:#fff;padding:12px 20px;border-radius:12px;z-index:99;display:none}
+.bn{display:none;position:fixed;bottom:0;left:0;right:0;background:rgba(10,7,32,.95);border-top:1px solid var(--line);z-index:60;padding:6px 0 8px}
+body.light .bn{background:rgba(255,255,255,.96)}
+.bn a{flex:1;text-align:center;font-size:11px;color:var(--mut);padding:4px}
+.bn a b{display:block;font-size:20px}
+.bn a.on{color:var(--p2)}
+.note{font-size:12px;color:var(--mut);margin-top:8px}
+@media(max-width:860px){
+ .links{display:none}.bn{display:flex}
+ .hero,.split,.two,.adm,.fg{grid-template-columns:1fr}
+ .art{order:-1}.orb{width:200px}.orb span{font-size:28px}
+ .cats{grid-template-columns:repeat(3,1fr)}
+ .strip,.why{grid-template-columns:1fr}.strip{gap:10px}
+ .stats{grid-template-columns:repeat(2,1fr)}
+ .side{display:flex;overflow-x:auto;gap:4px}.side button{white-space:nowrap;width:auto}
+ .grid{grid-template-columns:repeat(2,1fr)}
+}
+.heroimg img{width:100%;max-width:420px;border-radius:26px;box-shadow:0 20px 60px rgba(124,58,237,.55)}.heroimg{display:flex;justify-content:center}.hint{background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.4);border-radius:12px;padding:10px 12px;font-size:13px;margin-bottom:12px}.tabs{display:flex;gap:8px;margin-bottom:6px}.tabs button{flex:1;padding:10px;border-radius:10px;background:rgba(255,255,255,.06);font-weight:600}.tabs button.on{background:linear-gradient(135deg,var(--p),var(--p2));color:#fff}.svc .im img{width:100%;height:100%;object-fit:cover;border-radius:12px}@media(max-width:860px){.heroimg{order:-1}.heroimg img{max-width:340px}}</style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+<header><div class="wrap nav">
+ <a class="logo" href="#home">
+  <img src="img/logo.webp" width="40" height="40" style="border-radius:10px" alt="NexFly IT">
+  <div>NexFly <i>IT</i><small>সব ডিজিটাল সার্ভিস, এক জায়গায়</small></div></a>
+ <nav class="links" id="nav">
+  <a href="#home" data-r="home">হোম</a><a href="#services" data-r="services">সার্ভিসসমূহ</a><a href="#offers" data-r="offers">অফার</a><a href="#support" data-r="support">সাপোর্ট</a><a href="#track" data-r="track">অর্ডার ট্র্যাক</a>
+ </nav>
+ <div class="row" style="width:auto;align-items:center">
+  <button class="btn ghost sm" id="theme" title="থিম">🌙</button>
+  <a class="btn sm" id="authbtn" href="#login">লগইন</a>
+ </div>
+</div></header>
+
+<main class="wrap" id="app"><div class="pg" style="text-align:center;padding:80px 0">লোড হচ্ছে…</div></main>
+
+<footer><div class="wrap">
+ <div class="fg">
+  <div><div class="logo" style="margin-bottom:8px">NexFly <i>IT</i></div>সব ডিজিটাল সার্ভিস, এক জায়গায়। গেম টপআপ, ডিজাইন, ওয়েব ও আরও অনেক কিছু।</div>
+  <div><h4>দ্রুত লিংক</h4><a href="#home">হোম</a><a href="#services">সার্ভিসসমূহ</a><a href="#track">অর্ডার ট্র্যাক</a></div>
+  <div><h4>সাপোর্ট</h4><a href="#support">FAQ ও রিফান্ড পলিসি</a><a href="#support">যোগাযোগ</a></div>
+  <div><h4>পেমেন্ট মেথড</h4><div class="pays"><span class="pay bk">bKash</span><span class="pay ng">Nagad</span><span class="pay rk">Rocket</span></div></div>
+ </div>
+ <div class="copy">© 2026 NexFly IT. All rights reserved.</div>
+</div></footer>
+
+<nav class="bn" id="bn">
+ <a href="#home" data-r="home"><b>🏠</b>হোম</a><a href="#services" data-r="services"><b>🛍️</b>সার্ভিস</a><a href="#track" data-r="track"><b>📦</b>অর্ডার</a><a href="#support" data-r="support"><b>🎧</b>সাপোর্ট</a><a href="#login" data-r="login"><b>👤</b>একাউন্ট</a>
+</nav>
+<div class="toast" id="toast"></div>
+
+<script>
+const SB_URL="https://acvjmncxynhblarcvigs.supabase.co",SB_KEY="sb_publishable_L7pEEg-EVTvNdYew2k6LYg_tHT4kjuF";
+const sb=supabase.createClient(SB_URL,SB_KEY);
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const toast=m=>{const t=$('#toast');t.textContent=m;t.style.display='block';clearTimeout(toast.t);toast.t=setTimeout(()=>t.style.display='none',3000)};
+const COL=['#4c1d95,#7c3aed','#14532d,#16a34a','#7c2d12,#ea580c','#1e3a8a,#3b82f6','#831843,#ec4899'];
+let CATS=[],S=[],CFG={pay_number:'',coupon:'',discount:'0'},user=null,prof=null;
+let state={cat:null,q:'',pkg:0,method:'bkash',coupon:0,adm:'dash',mode:'in'};
+const price=s=>Math.min(...(s.packages||[[0,0]]).map(p=>p[1]));
+const bd=t=>new Date(t).toLocaleString('bn-BD',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'});
+const ST={pending:'পেন্ডিং',processing:'প্রসেসিং',completed:'সম্পন্ন',rejected:'বাতিল'};
+
+async function loadData(){
+ const [c,s,st]=await Promise.all([sb.from('nx_categories').select('*').order('sort'),sb.from('nx_services').select('*').order('sort'),sb.from('nx_settings').select('*')]);
+ CATS=c.data||[];S=s.data||[];(st.data||[]).forEach(r=>CFG[r.key]=r.value);
+}
+async function loadUser(){
+ const {data}=await sb.auth.getSession();user=data.session?.user||null;prof=null;
+ if(user){let {data:p}=await sb.from('nx_profiles').select('*').eq('id',user.id).maybeSingle();
+  if(!p){const m=user.user_metadata||{};await sb.from('nx_profiles').insert({id:user.id,name:m.name||user.email.split('@')[0],phone:m.phone||''});({data:p}=await sb.from('nx_profiles').select('*').eq('id',user.id).maybeSingle())}
+  prof=p}
+ $('#authbtn').textContent=user?'👤 '+(prof?.name||'একাউন্ট'):'লগইন';
+}
+const isAdmin=()=>prof&&prof.role==='admin';
+function listS(){return S.filter(s=>s.active&&(!state.cat||s.category_id===state.cat)&&(!state.q||(s.name+(s.description||'')).toLowerCase().includes(state.q.toLowerCase())))}
+function card(s,i){return `<div class="card svc"><div class="im" style="background:linear-gradient(135deg,${COL[i%5]})">${s.image_url?`<img src="${esc(s.image_url)}" alt="">`:s.icon||'⭐'}</div><h3>${esc(s.name)}</h3><p>${esc(s.description)}</p><div class="pr">৳${price(s)} থেকে</div><a class="btn sm" href="#svc-${esc(s.slug)}">অর্ডার করুন →</a></div>`}
+const catsHtml=()=>`<div class="cats">${CATS.map(c=>`<div class="card cat ${state.cat===c.id?'on':''}" data-c="${c.id}"><b>${c.icon}</b>${esc(c.name)}</div>`).join('')}</div>`;
+
+function home(){
+ const pop=S.filter(s=>s.active&&s.popular).slice(0,4);
+ return `<section class="hero"><div><span class="badge">🛡️ Trusted Digital Partner</span>
+ <h1>NexFly <i>IT</i></h1><div class="tag">“সব ডিজিটাল সার্ভিস, এক জায়গায়”</div>
+ <p>Game Top-up • Facebook Guide • Design & Editing<br>Web Development • And More...</p>
+ <div class="search"><input id="q" placeholder="🔍 কোন সার্ভিস খুঁজছেন?" value="${esc(state.q)}"><button id="qb">খুঁজুন</button></div></div>
+ <div class="heroimg"><img src="img/hero.webp" alt="NexFly IT"></div></section>
+ ${catsHtml()}
+ <div class="card strip"><div><span>⚡</span><p><b>দ্রুত সার্ভিস</b><small>মিনিটেই ডেলিভারি</small></p></div><div><span>🛡️</span><p><b>নিরাপদ পেমেন্ট</b><small>পরিষ্কার পেমেন্ট ও রিফান্ড নিয়ম</small></p></div><div><span>🎧</span><p><b>24/7 সাপোর্ট</b><small>যেকোনো সমস্যায় পাশে</small></p></div></div>
+ <div class="split"><div><h2 class="t">🔥 জনপ্রিয় সার্ভিস <a href="#services"><small>সব দেখুন →</small></a></h2><div class="grid" style="grid-template-columns:repeat(auto-fill,minmax(170px,1fr))">${pop.map(card).join('')}</div></div>
+ <div class="card offer"><span class="badge" style="width:fit-content">সীমিত সময়ের অফার!</span><h3>সব সার্ভিসে<br>Flat ${esc(CFG.discount)}% OFF</h3><div>কুপন কোড: <b style="color:var(--cy)">${esc(CFG.coupon)}</b></div><a class="btn" href="#services" style="margin-top:8px;width:fit-content">আজই অর্ডার করুন!</a></div></div>
+ <h2 class="t">কেন NexFly IT?</h2><div class="why"><div class="card"><span>⚡</span><b>অতি দ্রুত সার্ভিস</b><small>অর্ডারের পর দ্রুত প্রসেসিং</small></div><div class="card"><span>🛡️</span><b>নিরাপদ লেনদেন</b><small>পেমেন্ট যাচাইয়ের পর কাজ শুরু</small></div><div class="card"><span>🎧</span><b>24/7 সাপোর্ট</b><small>অর্ডার ট্র্যাক ও টিকেটের সুবিধা</small></div></div>`;
+}
+function services(){return `<div class="pg"><h2 class="t">সব সার্ভিস</h2>${catsHtml()}<div class="search" style="margin-bottom:14px"><input id="q" placeholder="🔍 সার্চ করুন" value="${esc(state.q)}"><button id="qb">খুঁজুন</button></div><div class="grid">${listS().map(card).join('')||'<p class="note">কিছু পাওয়া যায়নি</p>'}</div></div>`}
+function svcPage(slug){
+ const s=S.find(x=>x.slug===slug);if(!s)return '<div class="pg">সার্ভিস পাওয়া যায়নি।</div>';
+ const p=s.packages[state.pkg]||s.packages[0];
+ return `<div class="pg two"><div class="card box"><div class="svc"><div class="im" style="background:linear-gradient(135deg,${COL[0]});height:170px;font-size:70px">${s.image_url?`<img src="${esc(s.image_url)}" alt="">`:s.icon||'⭐'}</div></div>
+ <h2 style="margin-top:12px">${esc(s.name)}</h2><p class="note" style="font-size:14px">${esc(s.description)}</p><div style="color:var(--cy);font-size:24px;font-weight:700;margin:8px 0">৳${price(s)} থেকে</div>
+ <div class="ticks"><span>দ্রুত ডেলিভারি</span><span>পেমেন্ট যাচাইয়ের পর কাজ শুরু</span><span>অর্ডার ট্র্যাকিং সুবিধা</span></div></div>
+ <div class="card box"><h3>প্যাকেজ বেছে নিন</h3><div class="pk">${s.packages.map((x,i)=>`<button class="${i==state.pkg?'on':''}" data-p="${i}">${esc(x[0])}<small>৳${x[1]}</small></button>`).join('')}</div>
+ <form id="of">${s.fields.map((f,i)=>`<label>${esc(f.k)} ${f.r?'<b style="color:var(--bad)">*</b>':''}</label>${f.t==='textarea'?`<textarea name="f${i}" rows="3" ${f.r?'required':''}></textarea>`:`<input name="f${i}" ${f.r?'required':''}>`}`).join('')}
+ <div class="sum" style="margin-top:14px"><span>মোট</span><b>৳${p[1]}</b></div><button class="btn" style="width:100%;margin-top:14px">অর্ডার করুন →</button></form></div></div>`;
+}
+function loginPage(){
+ if(user)return `<div class="pg" style="max-width:480px;margin:auto"><div class="card box"><h3>👤 ${esc(prof?.name||'')}</h3><p class="note">${esc(user.email)}</p><div style="display:grid;gap:10px;margin-top:14px"><a class="btn" href="#track">আমার অর্ডার</a>${isAdmin()?'<a class="btn ghost" href="#admin">⚙️ অ্যাডমিন প্যানেল</a>':''}<button class="btn ghost" id="lo">লগআউট</button></div></div></div>`;
+ const su=state.mode==='up';
+ return `<div class="pg" style="max-width:480px;margin:auto"><div class="card box"><div class="tabs"><button class="${!su?'on':''}" data-md="in">লগইন</button><button class="${su?'on':''}" data-md="up">রেজিস্টার</button></div>
+ <form id="af">${su?'<label>নাম</label><input name="name" required><label>মোবাইল নম্বর</label><input name="phone" required placeholder="01XXXXXXXXX">':''}
+ <label>ইমেইল</label><input name="email" type="email" required><label>পাসওয়ার্ড</label><input name="pw" type="password" minlength="6" required>
+ <button class="btn" style="width:100%;margin-top:14px">${su?'একাউন্ট খুলুন':'লগইন করুন'}</button></form><p class="note">${su?'রেজিস্টারের পর ইমেইলে কনফার্মেশন লিংক এলে সেটি চাপুন।':''}</p></div></div>`;
+}
+function checkout(){
+ const c=window.CART;if(!c)return '<div class="pg">কোনো অর্ডার নেই। <a href="#services" class="btn sm">সার্ভিস দেখুন</a></div>';
+ const disc=state.coupon?Math.round(c.price*(+CFG.discount)/100):0;
+ const m={bkash:['bKash','bk'],nagad:['Nagad','ng'],rocket:['Rocket','rk']};
+ return `<div class="pg two"><div class="card box"><h3>অর্ডার সারাংশ</h3><div class="sum"><span>${esc(c.name)}</span><span>${esc(c.pkg)}</span></div><div class="sum"><span>দাম</span><span>৳${c.price}</span></div><div class="sum"><span>ছাড়</span><span>-৳${disc}</span></div><div class="sum"><b>সর্বমোট</b><b style="color:var(--cy)">৳${c.price-disc}</b></div>
+ <label>কুপন (ঐচ্ছিক)</label><div class="row"><input id="cp" placeholder="কুপন কোড"><button class="btn sm" id="ap">Apply</button></div></div>
+ <div class="card box"><h3>পেমেন্ট মেথড</h3><div class="methods">${Object.entries(m).map(([k,v])=>`<button class="pay ${v[1]} ${state.method===k?'on':''}" data-m="${k}">${v[0]}</button>`).join('')}</div>
+ <label>এই নম্বরে Send Money করুন (${m[state.method][0]})</label><div class="row"><input id="nm" readonly value="${esc(CFG.pay_number)}"><button class="btn sm" id="cpy">Copy</button></div>
+ <form id="cf"><label>যে নম্বর থেকে পাঠিয়েছেন <b style="color:var(--bad)">*</b></label><input name="ph" required placeholder="01XXXXXXXXX"><label>TrxID <b style="color:var(--bad)">*</b></label><input name="trx" required placeholder="TrxID লিখুন">
+ <button class="btn" style="width:100%;margin-top:14px">পেমেন্ট কনফার্ম করুন →</button></form><p class="note">TrxID যাচাইয়ের পর অর্ডার প্রসেস শুরু হবে।</p></div></div>`;
+}
+const STEPS=[['অর্ডার কনফার্ম'],['Processing'],['Completed']];
+function trackOne(o){
+ const idx={pending:0,processing:1,completed:2}[o.status];
+ return `<div class="pg" style="max-width:560px;margin:auto"><div class="card box"><h3>অর্ডার ট্র্যাকিং</h3><p>অর্ডার নং: <b>#${esc(o.code)}</b> <span class="st ${o.status}">${ST[o.status]}</span></p><p class="note">${esc(o.service_name)} – ${esc(o.package_name)} – ৳${o.total}</p>
+ ${o.status==='rejected'?`<div class="step"><div class="dot x">✕</div><div><b>অর্ডার বাতিল হয়েছে</b><br><small class="note">${esc(o.admin_note||'সাপোর্টে যোগাযোগ করুন')}</small></div></div>`:STEPS.map((s,i)=>`<div class="step"><div class="dot ${i<=idx?'d':''}">${i<=idx?'✓':''}</div><div><b>${s[0]}</b><br><small class="note">${i<=idx?bd(o.updated_at||o.created_at):''}</small></div></div>`).join('')}
+ ${o.status==='completed'?'<div class="card box" style="border-color:var(--ok)">✅ অর্ডার সফলভাবে সম্পন্ন হয়েছে! ধন্যবাদ NexFly IT-র সাথে থাকার জন্য।</div>':''}
+ <a class="btn" style="margin-top:14px;width:100%" href="#services">নতুন অর্ডার করুন</a></div></div>`;
+}
+async function track(code){
+ if(!user){location.hash='login';return}
+ $('#app').innerHTML='<div class="pg" style="text-align:center;padding:60px">লোড হচ্ছে…</div>';
+ const {data}=await sb.from('nx_orders').select('*').eq('user_id',user.id).order('created_at',{ascending:false});
+ const O=data||[];
+ if(code){const o=O.find(x=>x.code===code);$('#app').innerHTML=o?trackOne(o):'<div class="pg">অর্ডার পাওয়া যায়নি।</div>';return}
+ $('#app').innerHTML=`<div class="pg" style="max-width:640px;margin:auto"><h2 class="t">আমার অর্ডার</h2>${O.length?O.map(o=>`<a href="#track-${o.code}" class="card ol" style="display:block"><div style="display:flex;justify-content:space-between"><b>#${esc(o.code)}</b><span class="st ${o.status}">${ST[o.status]}</span></div><div class="note">${esc(o.service_name)} – ${esc(o.package_name)} – ৳${o.total}</div></a>`).join(''):'<p class="note">এখনও কোনো অর্ডার নেই।</p>'}</div>`;
+}
+function support(){
+ const f=[['পেমেন্টের পর কতক্ষণে সার্ভিস পাব?','TrxID যাচাইয়ের পর সাধারণত অল্প সময়ে প্রসেস শুরু হয়।'],['রিফান্ড পাওয়া যাবে?','সার্ভিস শুরুর আগে বাতিল করলে ফেরত পাবেন। শুরু হয়ে গেলে নির্দিষ্ট শর্ত প্রযোজ্য।'],['আইডি রিকভারি কি গ্যারান্টিসহ?','না। রিকভারি Meta-র সিদ্ধান্তের ওপর নির্ভর করে; আমরা শুধু নিজের একাউন্টে গাইড করি।']];
+ return `<div class="pg" style="max-width:720px;margin:auto"><h2 class="t">সাপোর্ট ও FAQ</h2>${f.map(x=>`<div class="card box" style="margin-bottom:10px"><b>${x[0]}</b><p class="note" style="font-size:14px">${x[1]}</p></div>`).join('')}
+ <div class="card box"><h3>টিকেট পাঠান</h3><form id="tf"><label>আপনার সমস্যা</label><textarea name="m" rows="3" required></textarea><button class="btn" style="margin-top:12px">সাবমিট</button></form></div></div>`;
+}
+async function admin(){
+ if(!isAdmin()){$('#app').innerHTML='<div class="pg" style="text-align:center;padding:60px">এই পেজ শুধু অ্যাডমিনের জন্য।</div>';return}
+ const {data}=await sb.from('nx_orders').select('*').order('created_at',{ascending:false});const O=data||[];
+ const rev=O.filter(o=>o.status==='completed').reduce((a,o)=>a+ +o.total,0);
+ const tabs=[['dash','📊 ড্যাশবোর্ড'],['orders','📦 অর্ডার'],['svc','🛍️ সার্ভিস'],['set','⚙️ সেটিংস']];
+ let body='';
+ if(state.adm==='dash'){
+  const days=[...Array(7)].map((_,i)=>{const d=new Date();d.setDate(d.getDate()-6+i);return d});
+  const vals=days.map(d=>O.filter(o=>o.status==='completed'&&new Date(o.created_at).toDateString()===d.toDateString()).reduce((a,o)=>a+ +o.total,0));const mx=Math.max(...vals,1);
+  body=`<div class="stats"><div class="card stat"><small>মোট অর্ডার</small><b>${O.length}</b></div><div class="card stat"><small>পেন্ডিং</small><b>${O.filter(o=>o.status==='pending').length}</b></div><div class="card stat"><small>সম্পন্ন</small><b>${O.filter(o=>o.status==='completed').length}</b></div><div class="card stat"><small>মোট আয়</small><b>৳${rev}</b></div></div><div class="card box"><h3>গত ৭ দিনের আয়</h3><div class="bars" style="margin-bottom:24px">${vals.map((v,i)=>`<div style="height:${v/mx*100}%" title="৳${v}"><span>${days[i].getDate()}</span></div>`).join('')}</div></div>`;
+ }
+ if(state.adm==='orders'){
+  body=`<div class="card box tw"><table><tr><th>নং</th><th>সার্ভিস</th><th>তথ্য</th><th>পেমেন্ট</th><th>স্ট্যাটাস</th><th></th></tr>${O.map(o=>`<tr><td>#${esc(o.code)}</td><td>${esc(o.service_name)}<br><small class="note">${esc(o.package_name)} ৳${o.total}</small></td><td><small>${(o.form_data||[]).map(esc).join('<br>')}</small></td><td><small>${esc(o.method)}<br>${esc(o.sender_phone)}<br>${esc(o.trx_id)}</small></td><td><span class="st ${o.status}">${ST[o.status]}</span></td><td>${o.status==='pending'?`<button class="btn sm ok" data-a="processing" data-o="${o.id}">Approve</button> <button class="btn sm bad" data-a="rejected" data-o="${o.id}">Reject</button>`:o.status==='processing'?`<button class="btn sm ok" data-a="completed" data-o="${o.id}">Complete</button>`:''}</td></tr>`).join('')||'<tr><td colspan="6" class="note">কোনো অর্ডার নেই</td></tr>'}</table></div>`;
+ }
+ if(state.adm==='svc'){
+  body=`<div class="card box"><h3>নতুন সার্ভিস যোগ করুন</h3><form id="sf"><div class="two"><div><label>নাম</label><input name="n" required></div><div><label>আইকন (ইমোজি)</label><input name="i" value="⭐"></div></div>
+  <div class="two"><div><label>ক্যাটাগরি</label><select name="c">${CATS.map(c=>`<option value="${c.id}">${esc(c.name)}</option>`).join('')}</select></div><div><label>সংক্ষিপ্ত বিবরণ</label><input name="d"></div></div>
+  <label>ছবি আপলোড (ঐচ্ছিক)</label><input type="file" name="img" accept="image/*">
+  <label>প্যাকেজ (প্রতি লাইনে: নাম, দাম)</label><textarea name="p" rows="3" placeholder="100 ডায়মন্ড, 35&#10;310 ডায়মন্ড, 90" required></textarea>
+  <label>ফর্ম ফিল্ড (প্রতি লাইনে একটি, শেষে * দিলে বাধ্যতামূলক)</label><textarea name="f" rows="3" placeholder="Player ID*&#10;নোট"></textarea><button class="btn" style="margin-top:12px">সার্ভিস যোগ করুন</button></form></div>
+  <div class="card box tw" style="margin-top:14px"><h3>সব সার্ভিস</h3><table>${S.map(s=>`<tr><td>${s.image_url?`<img src="${esc(s.image_url)}" style="width:40px;height:26px;object-fit:cover;border-radius:6px;vertical-align:middle">`:s.icon} ${esc(s.name)}</td><td>৳${price(s)}</td><td><button class="btn sm ghost" data-t="${s.id}">${s.active?'চালু':'বন্ধ'}</button> <button class="btn sm ghost" data-pop="${s.id}">${s.popular?'★ জনপ্রিয়':'☆'}</button> <label class="btn sm ghost" style="display:inline-flex;margin:0;color:var(--tx)">ছবি<input type="file" accept="image/*" data-im="${s.id}" style="display:none"></label> <button class="btn sm bad" data-x="${s.id}">মুছুন</button></td></tr>`).join('')}</table></div>`;
+ }
+ if(state.adm==='set'){
+  body=`<div class="card box"><h3>সাইট সেটিংস</h3><form id="cfg"><label>পেমেন্ট নম্বর (bKash/Nagad/Rocket)</label><input name="pay_number" value="${esc(CFG.pay_number)}"><label>কুপন কোড</label><input name="coupon" value="${esc(CFG.coupon)}"><label>ছাড় (%)</label><input name="discount" type="number" value="${esc(CFG.discount)}"><button class="btn" style="margin-top:12px">সেভ</button></form></div>`;
+ }
+ $('#app').innerHTML=`<div class="pg"><h2 class="t">NexFly IT অ্যাডমিন</h2><div class="adm"><div class="card side">${tabs.map(t=>`<button class="${state.adm===t[0]?'on':''}" data-ad="${t[0]}">${t[1]}</button>`).join('')}</div><div>${body}</div></div></div>`;
+ bindAdmin();
+}
+async function upImg(file,slug){
+ const ext=(file.name.split('.').pop()||'jpg').toLowerCase().replace(/[^a-z0-9]/g,'');const path=`${slug}-${Date.now()}.${ext}`;
+ const {error}=await sb.storage.from('nx-images').upload(path,file,{contentType:file.type});if(error){toast('আপলোড ব্যর্থ: '+error.message);return null}
+ return sb.storage.from('nx-images').getPublicUrl(path).data.publicUrl;
+}
+function bindAdmin(){
+ document.querySelectorAll('[data-ad]').forEach(b=>b.onclick=()=>{state.adm=b.dataset.ad;admin()});
+ document.querySelectorAll('[data-a]').forEach(b=>b.onclick=async()=>{const {error}=await sb.from('nx_orders').update({status:b.dataset.a,updated_at:new Date().toISOString()}).eq('id',b.dataset.o);if(error)toast(error.message);admin()});
+ document.querySelectorAll('[data-t]').forEach(b=>b.onclick=async()=>{const s=S.find(x=>x.id===b.dataset.t);await sb.from('nx_services').update({active:!s.active}).eq('id',s.id);await loadData();admin()});
+ document.querySelectorAll('[data-pop]').forEach(b=>b.onclick=async()=>{const s=S.find(x=>x.id===b.dataset.pop);await sb.from('nx_services').update({popular:!s.popular}).eq('id',s.id);await loadData();admin()});
+ document.querySelectorAll('[data-x]').forEach(b=>b.onclick=async()=>{if(!b.dataset.c){b.dataset.c=1;b.textContent='নিশ্চিত?';return}const {error}=await sb.from('nx_services').delete().eq('id',b.dataset.x);if(error)toast('মুছা যায়নি (অর্ডার আছে) – বন্ধ করুন');await loadData();admin()});
+ document.querySelectorAll('[data-im]').forEach(i=>i.onchange=async()=>{const s=S.find(x=>x.id===i.dataset.im);const u=await upImg(i.files[0],s.slug);if(u){await sb.from('nx_services').update({image_url:u}).eq('id',s.id);toast('ছবি বসেছে');await loadData();admin()}});
+ const sf=$('#sf');if(sf)sf.onsubmit=async e=>{e.preventDefault();const f=new FormData(sf);
+  const pk=f.get('p').split('\n').map(l=>l.split(',')).filter(a=>a.length>1&&+a[a.length-1]).map(a=>{const n=+a.pop();return[a.join(',').trim(),n]});if(!pk.length){toast('প্যাকেজ ফরম্যাট ঠিক নয়');return}
+  const fields=(f.get('f')||'').split('\n').map(x=>x.trim()).filter(Boolean).map(x=>({k:x.replace(/\*$/,''),t:'text',r:/\*$/.test(x)?1:0}));
+  const slug='s'+Date.now();let image_url=null;const fi=f.get('img');if(fi&&fi.size)image_url=await upImg(fi,slug);
+  const {error}=await sb.from('nx_services').insert({slug,category_id:f.get('c'),name:f.get('n'),icon:f.get('i')||'⭐',description:f.get('d'),image_url,packages:pk,fields,sort:S.length+1});
+  if(error){toast(error.message);return}toast('সার্ভিস যোগ হয়েছে');await loadData();admin()};
+ const cg=$('#cfg');if(cg)cg.onsubmit=async e=>{e.preventDefault();const f=new FormData(cg);const rows=['pay_number','coupon','discount'].map(k=>({key:k,value:String(f.get(k))}));const {error}=await sb.from('nx_settings').upsert(rows);if(error)toast(error.message);else{rows.forEach(r=>CFG[r.key]=r.value);toast('সেভ হয়েছে')}};
+}
+
+function route(){
+ const h=(location.hash||'#home').slice(1);const r=h.split('-')[0],arg=h.slice(r.length+1);
+ document.querySelectorAll('[data-r]').forEach(a=>a.classList.toggle('on',a.dataset.r===r));
+ if(r==='track'){track(arg);return}
+ if(r==='admin'){admin();return}
+ let html;
+ if(r==='services')html=services();else if(r==='svc')html=svcPage(arg);else if(r==='checkout')html=checkout();else if(r==='support')html=support();else if(r==='login')html=loginPage();else html=home();
+ $('#app').innerHTML=html;scrollTo(0,0);bind(r,arg);
+}
+function bind(r,arg){
+ document.querySelectorAll('.cat').forEach(e=>e.onclick=()=>{state.cat=state.cat===e.dataset.c?null:e.dataset.c;if(r==='home')location.hash='services';else route()});
+ const q=$('#q');if(q){const go=()=>{state.q=q.value;if(r==='home')location.hash='services';else route()};$('#qb').onclick=go;q.onkeydown=e=>{if(e.key==='Enter')go()}}
+ if(r==='svc'){const s=S.find(x=>x.slug===arg);document.querySelectorAll('[data-p]').forEach(b=>b.onclick=()=>{state.pkg=+b.dataset.p;route()});
+  const f=$('#of');if(f)f.onsubmit=e=>{e.preventDefault();const p=s.packages[state.pkg]||s.packages[0];const fd=new FormData(f);window.CART={id:s.id,name:s.name,pkg:p[0],price:p[1],data:s.fields.map((x,i)=>x.k+': '+(fd.get('f'+i)||''))};state.coupon=0;if(!user){toast('অর্ডার করতে আগে লগইন করুন');window.AFTER='checkout';location.hash='login'}else location.hash='checkout'}}
+ if(r==='checkout'){if(!user){window.AFTER='checkout';location.hash='login';return}
+  document.querySelectorAll('[data-m]').forEach(b=>b.onclick=()=>{state.method=b.dataset.m;route()});
+  $('#cpy').onclick=()=>{try{navigator.clipboard.writeText(CFG.pay_number);toast('কপি হয়েছে')}catch(e){toast('নম্বর: '+CFG.pay_number)}};
+  $('#ap').onclick=()=>{if($('#cp').value.trim().toUpperCase()===CFG.coupon.toUpperCase()){state.coupon=1;toast('কুপন প্রযোজ্য হয়েছে');route()}else toast('কুপন সঠিক নয়')};
+  $('#cf').onsubmit=async e=>{e.preventDefault();const btn=e.target.querySelector('button');btn.disabled=true;const c=window.CART;const fd=new FormData(e.target);const disc=state.coupon?Math.round(c.price*(+CFG.discount)/100):0;
+   const {data,error}=await sb.from('nx_orders').insert({user_id:user.id,service_id:c.id,service_name:c.name,package_name:c.pkg,price:c.price,discount:disc,total:c.price-disc,form_data:c.data,method:state.method,sender_phone:fd.get('ph'),trx_id:fd.get('trx')}).select().single();
+   if(error){toast(error.message);btn.disabled=false;return}window.CART=null;state.coupon=0;toast('অর্ডার জমা হয়েছে');location.hash='track-'+data.code}}
+ if(r==='support'){$('#tf').onsubmit=async e=>{e.preventDefault();if(!user){toast('টিকেট পাঠাতে লগইন করুন');location.hash='login';return}const {error}=await sb.from('nx_tickets').insert({user_id:user.id,message:new FormData(e.target).get('m')});if(error)toast(error.message);else{e.target.reset();toast('টিকেট জমা হয়েছে')}}}
+ if(r==='login'){document.querySelectorAll('[data-md]').forEach(b=>b.onclick=()=>{state.mode=b.dataset.md;route()});
+  const lo=$('#lo');if(lo)lo.onclick=async()=>{await sb.auth.signOut();toast('লগআউট হয়েছে');location.hash='home'};
+  const af=$('#af');if(af)af.onsubmit=async e=>{e.preventDefault();const f=new FormData(af);const btn=af.querySelector('button');btn.disabled=true;
+   if(state.mode==='up'){const {data,error}=await sb.auth.signUp({email:f.get('email'),password:f.get('pw'),options:{data:{name:f.get('name'),phone:f.get('phone')}}});btn.disabled=false;
+    if(error){toast(error.message);return}if(!data.session){toast('ইমেইলে কনফার্মেশন লিংক পাঠানো হয়েছে, কনফার্ম করে লগইন করুন');state.mode='in';route();return}}
+   else{const {error}=await sb.auth.signInWithPassword({email:f.get('email'),password:f.get('pw')});btn.disabled=false;if(error){toast('ইমেইল বা পাসওয়ার্ড ভুল');return}}}}
+}
+$('#theme').onclick=()=>{document.body.classList.toggle('light');$('#theme').textContent=document.body.classList.contains('light')?'☀️':'🌙'};
+addEventListener('hashchange',route);
+sb.auth.onAuthStateChange((ev,sess)=>{setTimeout(async()=>{await loadUser();if(ev==='SIGNED_IN'||ev==='SIGNED_OUT'){if(window.AFTER&&user){const a=window.AFTER;window.AFTER=null;location.hash=a}else if(ev==='SIGNED_IN'&&(location.hash==='#login'))location.hash='home';else route()}},0)});
+(async()=>{try{await loadData();await loadUser()}catch(e){console.error(e)}route()})();
+</script>
+</body>
+</html>
