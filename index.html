@@ -182,7 +182,7 @@ body.light .bn{background:rgba(255,255,255,.96)}
  .links{display:none}.bn{display:flex}
  .hero,.split,.two,.adm,.fg{grid-template-columns:1fr}
  .heroimg{order:-1}.heroimg img{max-width:340px}
- .cats{grid-template-columns:repeat(3,1fr)}
+ .cats{grid-template-columns:repeat(2,1fr)}
  .strip,.why,.how{grid-template-columns:1fr}
  .stats{grid-template-columns:repeat(2,1fr)}
  .side{display:flex;overflow-x:auto;gap:4px;position:static}.side button{white-space:nowrap;width:auto}
@@ -219,6 +219,8 @@ body.light .bn{background:rgba(255,255,255,.96)}
 .side button .ic{margin-right:8px}
 .bn a .ic{width:22px;height:22px;display:block;margin:0 auto 2px}
 .pill{display:inline-flex;gap:6px;align-items:center}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+#app>*{animation:pgin .25s ease-out}@keyframes pgin{from{opacity:0;transform:translateY(10px)}}
 @media(max-width:860px){.tstrip{grid-template-columns:repeat(2,1fr)}.stage{width:min(340px,88vw)}}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -245,7 +247,7 @@ const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&
 const toast=m=>{const t=$('#toast');t.textContent=m;t.style.display='block';clearTimeout(toast.t);toast.t=setTimeout(()=>t.style.display='none',3200)};
 const COL=['#4c1d95,#7c3aed','#14532d,#16a34a','#7c2d12,#ea580c','#1e3a8a,#3b82f6','#831843,#ec4899'];
 const lsg=(k,d)=>{try{return JSON.parse(localStorage.getItem(k))??d}catch(e){return d}},lss=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
-let CATS=[],S=[],CFG={pay_number:'',coupon:'',discount:'0',whatsapp:'',facebook:'',support_email:'',announcement:''},user=null,prof=null,WISH=lsg('nx_wish',[]);
+let CATS=[],S=[],CFG={pay_number:'',coupon:'',discount:'0',whatsapp:'',facebook:'',support_email:'',announcement:'',terms:'',refund_policy:'',privacy_policy:''},user=null,prof=null,WISH=lsg('nx_wish',[]);
 let state={cat:null,q:'',sort:'pop',fav:0,pkg:0,method:'bkash',coupon:0,adm:'dash',mode:'in',of:'all',oq:''};
 const price=s=>Math.min(...(s.packages||[[0,0]]).map(p=>p[1]));
 const bd=t=>new Date(t).toLocaleString('bn-BD',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'});
@@ -265,7 +267,7 @@ async function loadData(){
 function renderFooter(){
  $('#ft').innerHTML=`<div class="fg"><div><div class="logo" style="margin-bottom:8px"><img src="img/logo.webp" width="32" height="32" alt="">NexFly <i>IT</i></div>সব ডিজিটাল সার্ভিস, এক জায়গায়। গেম টপআপ, ডিজাইন, ওয়েব ও আরও অনেক কিছু।</div>
  <div><h4>দ্রুত লিংক</h4><a href="#home">হোম</a><a href="#services">সার্ভিসসমূহ</a><a href="#track">অর্ডার ট্র্যাক</a></div>
- <div><h4>সাপোর্ট</h4><a href="#support">FAQ ও রিফান্ড পলিসি</a>${CFG.whatsapp?`<a href="https://wa.me/${esc(CFG.whatsapp.replace(/\D/g,''))}" target="_blank" rel="noopener">WhatsApp</a>`:''}${CFG.facebook?`<a href="${esc(CFG.facebook)}" target="_blank" rel="noopener">Facebook</a>`:''}${CFG.support_email?`<a href="mailto:${esc(CFG.support_email)}">${esc(CFG.support_email)}</a>`:''}</div>
+ <div><h4>সাপোর্ট</h4><a href="#support">FAQ ও সাপোর্ট</a><a href="#policy-terms">শর্তাবলী</a><a href="#policy-refund">রিফান্ড পলিসি</a><a href="#policy-privacy">প্রাইভেসি পলিসি</a>${CFG.whatsapp?`<a href="https://wa.me/${esc(CFG.whatsapp.replace(/\D/g,''))}" target="_blank" rel="noopener">WhatsApp</a>`:''}${CFG.facebook?`<a href="${esc(CFG.facebook)}" target="_blank" rel="noopener">Facebook</a>`:''}${CFG.support_email?`<a href="mailto:${esc(CFG.support_email)}">${esc(CFG.support_email)}</a>`:''}</div>
  <div><h4>পেমেন্ট মেথড</h4><div class="pays"><span class="pay bk">bKash</span><span class="pay ng">Nagad</span><span class="pay rk">Rocket</span></div></div></div><div class="copy">© 2026 NexFly IT. All rights reserved.</div>`;
 }
 async function loadUser(){
@@ -290,14 +292,14 @@ function home(){
  <p>Game Top-up • Facebook Guide • Design & Editing<br>Web Development • And More...</p>
  <div class="heroctas"><a class="btn" href="#services">সার্ভিস দেখুন →</a><a class="btn ghost" href="#track">অর্ডার ট্র্যাক করুন</a></div>
  <div class="search"><input id="q" autocomplete="off" placeholder="🔍 কোন সার্ভিস খুঁজছেন?" value="${esc(state.q)}"><button id="qb">খুঁজুন</button><div class="sug" id="sug" style="display:none"></div></div>
- <div class="kpis"><div><b>${S.filter(s=>s.active).length}+</b><small>সার্ভিস</small></div><div><b>${CATS.length}</b><small>ক্যাটাগরি</small></div><div><b>24/7</b><small>সাপোর্ট</small></div></div></div>
+ <div class="kpis"><div><b>${S.filter(s=>s.active).length}+</b><small>সার্ভিস</small></div><div><b>${CATS.length}</b><small>ক্যাটাগরি</small></div><div><b>✔</b><small>অর্ডার ট্র্যাকিং</small></div></div></div>
  <div class="heroimg"><div class="stage"><div class="ring r1"></div><div class="ring r2"></div><img class="core" src="img/a01.webp" alt="NexFly IT"><img class="fl f1" src="img/a02.webp" alt=""><img class="fl f2" src="img/a03.webp" alt=""><img class="fl f3" src="img/a05.webp" alt=""><img class="fl f4" src="img/a07.webp" alt=""><img class="fl f5" src="img/a08.webp" alt=""><img class="fl f6" src="img/a10.webp" alt=""></div></div></section>
  ${catsHtml()}
- <div class="card tstrip"><div><span style="font-size:30px">⚡</span><p><b>দ্রুত সার্ভিস</b><small>মিনিটেই ডেলিভারি</small></p></div><div><img src="img/a06.webp" alt=""><p><b>নিরাপদ পেমেন্ট</b><small>ভেরিফিকেশনসহ লেনদেন</small></p></div><div><img src="img/a12.webp" alt=""><p><b>24/7 সাপোর্ট</b><small>পাশে আছি সবসময়</small></p></div><div><img src="img/a10.webp" alt=""><p><b>এক্সক্লুসিভ অফার</b><small>কুপনে বিশেষ ছাড়</small></p></div></div>
+ <div class="card tstrip"><div><span style="font-size:30px">⚡</span><p><b>দ্রুত সার্ভিস</b><small>দ্রুত প্রসেসিং</small></p></div><div><img src="img/a06.webp" alt=""><p><b>নিরাপদ পেমেন্ট</b><small>ভেরিফিকেশনসহ লেনদেন</small></p></div><div><img src="img/a12.webp" alt=""><p><b>সাপোর্ট</b><small>অর্ডার ও টিকেটে সহায়তা</small></p></div><div><img src="img/a10.webp" alt=""><p><b>এক্সক্লুসিভ অফার</b><small>কুপনে বিশেষ ছাড়</small></p></div></div>
  <div class="split"><div><h2 class="t">🔥 জনপ্রিয় সার্ভিস <a href="#services"><small>সব দেখুন →</small></a></h2><div class="grid" style="grid-template-columns:repeat(auto-fill,minmax(170px,1fr))">${pop.map(card).join('')}</div></div>
  <div class="card offer"><img class="gift" src="img/a10.webp" alt=""><span class="badge" style="width:fit-content">সীমিত সময়ের অফার!</span><h3>সব সার্ভিসে<br>Flat ${esc(CFG.discount)}% OFF</h3><div>কুপন কোড (চাপ দিয়ে কপি):</div><span class="cpn" id="cpc">🎟️ ${esc(CFG.coupon)}</span><a class="btn" href="#services" style="width:fit-content;margin-top:4px">আজই অর্ডার করুন!</a></div></div>
  <h2 class="t">কীভাবে অর্ডার করবেন?</h2><div class="how"><div class="card rv0"><div class="n">1</div><b>সার্ভিস বেছে নিন</b><small>প্যাকেজ ও প্রয়োজনীয় তথ্য দিন</small></div><div class="card rv0"><div class="n">2</div><b>পেমেন্ট করুন</b><small>bKash/Nagad/Rocket-এ পাঠিয়ে TrxID দিন</small></div><div class="card rv0"><div class="n">3</div><b>ডেলিভারি নিন</b><small>অর্ডার ট্র্যাক করে সার্ভিস বুঝে নিন</small></div></div>
- <h2 class="t">কেন NexFly IT?</h2><div class="why"><div class="card rv0"><span>⚡</span><b>অতি দ্রুত সার্ভিস</b><small>অর্ডারের পর দ্রুত প্রসেসিং</small></div><div class="card rv0"><span>🛡️</span><b>নিরাপদ লেনদেন</b><small>পেমেন্ট যাচাইয়ের পর কাজ শুরু</small></div><div class="card rv0"><span>🎧</span><b>24/7 সাপোর্ট</b><small>অর্ডার ট্র্যাক ও টিকেটের সুবিধা</small></div></div>
+ <h2 class="t">কেন NexFly IT?</h2><div class="why"><div class="card rv0"><span>⚡</span><b>অতি দ্রুত সার্ভিস</b><small>অর্ডারের পর দ্রুত প্রসেসিং</small></div><div class="card rv0"><span>🛡️</span><b>নিরাপদ লেনদেন</b><small>পেমেন্ট যাচাইয়ের পর কাজ শুরু</small></div><div class="card rv0"><span>🎧</span><b>সাপোর্ট</b><small>অর্ডার ট্র্যাক ও টিকেটের সুবিধা</small></div></div>
  <h2 class="t">❤ গ্রাহকদের মতামত</h2><div class="rvs" id="hrv"><div class="card rv"><small>লোড হচ্ছে…</small></div></div>`;
 }
 function services(){return `<div class="pg"><h2 class="t">সব সার্ভিস</h2>
@@ -310,12 +312,13 @@ function svcPage(slug){
  const p=s.packages[state.pkg]||s.packages[0];
  return `<div class="pg two"><div><div class="card box"><div class="crumb"><a href="#home">হোম</a> › <a href="#services">সার্ভিস</a> › ${esc(s.name)}</div><div class="svc" style="padding:0;border:0"><div class="im ${(s.image_url||'').startsWith('img/a')?'art':''}" style="background:linear-gradient(135deg,${COL[0]});height:200px;font-size:70px">${s.image_url?`<img src="${esc(s.image_url)}" alt="${esc(s.name)}">`:s.icon||'⭐'}</div></div>
  <h2 style="margin-top:12px">${esc(s.name)}</h2><div id="avg" class="note"></div><p class="note" style="font-size:14px">${esc(s.description)}</p><div style="color:var(--cy);font-size:24px;font-weight:700;margin:8px 0">৳${price(s)} থেকে</div>
- <div class="ticks"><span>দ্রুত ডেলিভারি</span><span>পেমেন্ট যাচাইয়ের পর কাজ শুরু</span><span>অর্ডার ট্র্যাকিং সুবিধা</span></div></div>
+ <div class="ticks"><span>দ্রুত প্রসেসিং</span><span>পেমেন্ট যাচাইয়ের পর কাজ শুরু</span><span>অর্ডার ট্র্যাকিং সুবিধা</span></div>${s.category_id==='fb'?'<div class="hint">⚠️ আমরা কখনো আপনার পাসওয়ার্ড বা OTP চাই না। শুধু নিজের একাউন্টের জন্য গাইড দেওয়া হয়; ফলাফলের গ্যারান্টি নেই।</div>':''}</div>
  <h3 style="margin:16px 0 8px">রিভিউ</h3><div class="rvs" id="srv" style="grid-template-columns:1fr"></div></div>
  <div class="card box" style="height:fit-content"><h3>প্যাকেজ বেছে নিন</h3><div class="pk">${s.packages.map((x,i)=>`<button class="${i==state.pkg?'on':''}" data-p="${i}">${esc(x[0])}<small>৳${x[1]}</small></button>`).join('')}</div>
  <form id="of">${s.fields.map((f,i)=>`<label>${esc(f.k)} ${f.r?'<b style="color:var(--bad)">*</b>':''}</label>${f.t==='textarea'?`<textarea name="f${i}" rows="3" ${f.r?'required':''}></textarea>`:`<input name="f${i}" ${f.r?'required':''}>`}`).join('')}
  <div class="sum" style="margin-top:14px"><span>মোট</span><b>৳${p[1]}</b></div><button class="btn" style="width:100%;margin-top:14px">অর্ডার করুন →</button></form></div></div>`;
 }
+function policy(k){const m={terms:['শর্তাবলী','terms'],refund:['রিফান্ড পলিসি','refund_policy'],privacy:['প্রাইভেসি পলিসি','privacy_policy']}[k]||['শর্তাবলী','terms'];return `<div class="pg" style="max-width:720px;margin:auto"><div class="card box"><h2>${m[0]}</h2><p style="white-space:pre-wrap;color:var(--mut);margin-top:10px;line-height:1.8">${esc(CFG[m[1]]||'শীঘ্রই যোগ করা হবে।')}</p></div></div>`}
 function loginPage(){
  if(user)return account();
  const su=state.mode==='up';
@@ -338,7 +341,7 @@ function checkout(){
  <div class="card box"><h3>পেমেন্ট মেথড</h3><div class="methods">${Object.entries(m).map(([k,v])=>`<button class="pay ${v[1]} ${state.method===k?'on':''}" data-m="${k}">${v[0]}</button>`).join('')}</div>
  <label>এই নম্বরে Send Money করুন (${m[state.method][0]})</label><div class="row"><input id="nm" readonly value="${esc(CFG.pay_number)}"><button class="btn sm" id="cpy">Copy</button></div>
  <form id="cf"><label>যে নম্বর থেকে পাঠিয়েছেন <b style="color:var(--bad)">*</b></label><input name="ph" required placeholder="01XXXXXXXXX"><label>TrxID <b style="color:var(--bad)">*</b></label><input name="trx" required placeholder="TrxID লিখুন">
- <button class="btn" style="width:100%;margin-top:14px">পেমেন্ট কনফার্ম করুন →</button></form><p class="note">TrxID যাচাইয়ের পর অর্ডার প্রসেস শুরু হবে।</p></div></div></div>`;
+ <label style="display:flex;gap:8px;align-items:flex-start;color:var(--tx)"><input type="checkbox" required style="width:auto;margin-top:4px"><span>আমি <a href="#policy-terms" target="_blank" style="color:var(--p2)">শর্তাবলী</a> ও <a href="#policy-refund" target="_blank" style="color:var(--p2)">রিফান্ড পলিসি</a> পড়েছি ও সম্মত।</span></label><button class="btn" style="width:100%;margin-top:14px">পেমেন্ট কনফার্ম করুন →</button></form><p class="note">TrxID যাচাইয়ের পর অর্ডার প্রসেস শুরু হবে।</p></div></div></div>`;
 }
 const STEPS=['অর্ডার কনফার্ম','Processing','Completed'];
 function trackOne(o,rev,fresh){
@@ -406,7 +409,7 @@ async function admin(){
  }
  if(state.adm==='set'){
   const f=(k,l,t='text')=>`<label>${l}</label><input name="${k}" type="${t}" value="${esc(CFG[k])}">`;
-  body=`<div class="card box"><h3>সাইট সেটিংস</h3><form id="cfg">${f('pay_number','পেমেন্ট নম্বর (bKash/Nagad/Rocket)')}${f('coupon','কুপন কোড')}${f('discount','ছাড় (%)','number')}${f('announcement','ওপরের ঘোষণা বার (ফাঁকা রাখলে লুকাবে)')}${f('whatsapp','WhatsApp নম্বর (কান্ট্রি কোডসহ, যেমন 8801XXXXXXXXX)')}${f('facebook','Facebook পেজ লিংক')}${f('support_email','সাপোর্ট ইমেইল','email')}<button class="btn" style="margin-top:12px">সেভ</button></form></div>`;
+  body=`<div class="card box"><h3>সাইট সেটিংস</h3><form id="cfg">${f('pay_number','পেমেন্ট নম্বর (bKash/Nagad/Rocket)')}${f('coupon','কুপন কোড')}${f('discount','ছাড় (%)','number')}${f('announcement','ওপরের ঘোষণা বার (ফাঁকা রাখলে লুকাবে)')}${f('whatsapp','WhatsApp নম্বর (কান্ট্রি কোডসহ, যেমন 8801XXXXXXXXX)')}${f('facebook','Facebook পেজ লিংক')}${f('support_email','সাপোর্ট ইমেইল','email')}${['terms','refund_policy','privacy_policy'].map((k,i)=>`<label>${['শর্তাবলী','রিফান্ড পলিসি','প্রাইভেসি পলিসি'][i]}</label><textarea name="${k}" rows="5">${esc(CFG[k])}</textarea>`).join('')}<button class="btn" style="margin-top:12px">সেভ</button></form></div>`;
  }
  $('#app').innerHTML=`<div class="pg"><h2 class="t">NexFly IT অ্যাডমিন</h2><div class="adm"><div class="card side">${tabs.map(t=>`<button class="${state.adm===t[0]?'on':''}" data-ad="${t[0]}">${t[1]}</button>`).join('')}</div><div>${body}</div></div></div>`;
  window.ADM={O};bindAdmin();
@@ -438,7 +441,7 @@ function bindAdmin(){
   const row={category_id:f.get('c'),name:f.get('n'),icon:f.get('i')||'⭐',description:f.get('d'),image_url,packages:pk,fields};
   const {error}=e0?await sb.from('nx_services').update(row).eq('id',e0.id):await sb.from('nx_services').insert({...row,slug,sort:S.length+1});
   if(error){toast(error.message);return}toast(e0?'আপডেট হয়েছে':'সার্ভিস যোগ হয়েছে');state.edit=null;await loadData();admin()};
- const cg=$('#cfg');if(cg)cg.onsubmit=async e=>{e.preventDefault();const f=new FormData(cg);const rows=['pay_number','coupon','discount','announcement','whatsapp','facebook','support_email'].map(k=>({key:k,value:String(f.get(k)||'')}));const {error}=await sb.from('nx_settings').upsert(rows);if(error)toast(error.message);else{rows.forEach(r=>CFG[r.key]=r.value);await loadData();toast('সেভ হয়েছে')}};
+ const cg=$('#cfg');if(cg)cg.onsubmit=async e=>{e.preventDefault();const f=new FormData(cg);const rows=['pay_number','coupon','discount','announcement','whatsapp','facebook','support_email','terms','refund_policy','privacy_policy'].map(k=>({key:k,value:String(f.get(k)||'')}));const {error}=await sb.from('nx_settings').upsert(rows);if(error)toast(error.message);else{rows.forEach(r=>CFG[r.key]=r.value);await loadData();toast('সেভ হয়েছে')}};
 }
 function revCard(r){return `<div class="card rv"><span class="stars">${stars(r.rating)}</span><p>${esc(r.comment||'চমৎকার সার্ভিস!')}</p><small>— ${esc(r.reviewer_name||'গ্রাহক')} • Verified Order</small></div>`}
 async function loadRev(r,arg){
@@ -455,7 +458,7 @@ async function route(){
  if(r==='track'){await track(arg);reveal();return}
  if(r==='admin'){await admin();return}
  let html;
- if(r==='services')html=services();else if(r==='svc')html=svcPage(arg);else if(r==='checkout')html=checkout();else if(r==='support')html=await support();else if(r==='login')html=loginPage();else html=home();
+ if(r==='services')html=services();else if(r==='svc')html=svcPage(arg);else if(r==='checkout')html=checkout();else if(r==='support')html=await support();else if(r==='login')html=loginPage();else if(r==='policy')html=policy(arg);else html=home();
  $('#app').innerHTML=html;scrollTo(0,0);bind(r,arg);reveal();loadRev(r,arg);
 }
 function bind(r,arg){
@@ -475,7 +478,7 @@ function bind(r,arg){
   $('#ap').onclick=()=>{if($('#cp').value.trim().toUpperCase()===CFG.coupon.toUpperCase()){state.coupon=1;toast('কুপন প্রযোজ্য হয়েছে');route()}else toast('কুপন সঠিক নয়')};
   $('#cf').onsubmit=async e=>{e.preventDefault();const btn=e.target.querySelector('button');btn.disabled=true;const c=window.CART;const fd=new FormData(e.target);const disc=state.coupon?Math.round(c.price*(+CFG.discount)/100):0;
    const {data,error}=await sb.from('nx_orders').insert({user_id:user.id,service_id:c.id,service_name:c.name,package_name:c.pkg,price:c.price,discount:disc,total:c.price-disc,form_data:c.data,method:state.method,sender_phone:fd.get('ph'),trx_id:fd.get('trx')}).select().single();
-   if(error){toast(error.message);btn.disabled=false;return}window.CART=null;state.coupon=0;window.FRESH=data.code;location.hash='track-'+data.code}}
+   if(error){toast(error.code==='23505'?'এই TrxID আগে ব্যবহার হয়েছে। সঠিক TrxID দিন।':error.message);btn.disabled=false;return}window.CART=null;state.coupon=0;window.FRESH=data.code;location.hash='track-'+data.code}}
  if(r==='support'){const tf=$('#tf');if(tf)tf.onsubmit=async e=>{e.preventDefault();if(!user){toast('টিকেট পাঠাতে লগইন করুন');window.AFTER='support';location.hash='login';return}const {error}=await sb.from('nx_tickets').insert({user_id:user.id,message:new FormData(e.target).get('m')});if(error)toast(error.message);else{toast('টিকেট জমা হয়েছে');route()}}}
  if(r==='login'){document.querySelectorAll('[data-md]').forEach(b=>b.onclick=()=>{state.mode=b.dataset.md;route()});
   const pwt=$('#pwt');if(pwt)pwt.onclick=()=>{const i=$('#pwi');i.type=i.type==='password'?'text':'password'};
